@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lifeline Karachi — Can You Donate Blood Today?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1F0EC; --ink:#20211F; --oxblood:#8E1B2E; --oxblood-deep:#5E1220;
+    --teal:#1F5C52; --line:#CFCBC0; --card:#FBFAF7;
+    padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); box-sizing:border-box;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --paper:#17181A; --ink:#EDEBE4; --card:#1F2123; --line:#3A3C3A; --oxblood:#D9536B; --teal:#4FA694; }
+  }
+  :root[data-theme="dark"]{ --paper:#17181A; --ink:#EDEBE4; --card:#1F2123; --line:#3A3C3A; --oxblood:#D9536B; --teal:#4FA694; }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior:smooth;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  h1,h2,h3,.serif{font-family:'Source Serif 4',Georgia,serif;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+  header.top{padding:14px 24px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); position:sticky; top:env(safe-area-inset-top,0px); background:var(--paper); z-index:10;}
+  .brand{font-family:'Source Serif 4',serif; font-weight:700; font-size:1.05rem;}
+  .brand span{color:var(--oxblood);}
+  nav a{color:var(--ink); text-decoration:none; font-size:.85rem; margin-left:18px; opacity:.75;}
+  nav a:hover{opacity:1;}
+
+  .hero{padding:56px 24px 20px; display:grid; grid-template-columns:1.2fr .8fr; gap:32px; align-items:center;}
+  .hero h1{font-size:2.35rem; font-weight:600; margin:0 0 16px; line-height:1.16;}
+  .hero p.lede{font-size:1.05rem; max-width:32em; margin:0 0 26px; opacity:.85;}
+  .hero-art{width:100%; max-width:220px; justify-self:center;}
+  .stat-row{display:flex; gap:26px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:20px; margin-top:20px;}
+  .stat b{display:block; font-family:'Source Serif 4',serif; font-size:1.6rem; color:var(--oxblood);}
+  .stat span{font-size:.78rem; opacity:.7;}
+
+  section{padding:44px 0; border-top:1px solid var(--line);}
+  section h2{font-size:1.45rem; margin:0 0 6px;}
+  section .kicker{font-size:.85rem; color:var(--teal); margin:0 0 4px; font-weight:600;}
+  section > p.intro{opacity:.8; max-width:38em; margin:0 0 26px;}
+
+  #checker-card{background:var(--card); border:1px solid var(--line); border-radius:4px; padding:26px;}
+  .q{display:none;}
+  .q.active{display:block; animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+  .q p{font-size:1.05rem; font-weight:500; margin:0 0 16px;}
+  .btnrow{display:flex; gap:10px;}
+  .opt{flex:1; padding:12px; border:1px solid var(--line); background:transparent; color:var(--ink); border-radius:4px; cursor:pointer; font-size:.95rem; font-family:inherit;}
+  .opt:hover{border-color:var(--oxblood);}
+  .progress{height:3px; background:var(--line); border-radius:2px; margin-bottom:22px; overflow:hidden;}
+  .progress i{display:block; height:100%; background:var(--oxblood); width:0%; transition:width .3s ease;}
+  #result{display:none; text-align:left;}
+  #result.show{display:block;}
+  #result h3{margin:0 0 8px; font-size:1.3rem;}
+  #result p{opacity:.85; margin:0 0 16px;}
+  .pill{display:inline-block; padding:4px 12px; border-radius:20px; font-size:.8rem; font-weight:600; margin-bottom:14px;}
+  .pill.yes{background:rgba(31,92,82,.15); color:var(--teal);}
+  .pill.no{background:rgba(142,27,46,.15); color:var(--oxblood);}
+  .restart{background:none; border:none; color:var(--teal); text-decoration:underline; cursor:pointer; font-size:.85rem; padding:0; font-family:inherit;}
+
+  .steps{display:grid; gap:0;}
+  .step{display:grid; grid-template-columns:44px 1fr; gap:16px; padding:18px 0; border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step .num-ic{width:44px; height:44px;}
+  .step h4{margin:2px 0 4px; font-size:1rem;}
+  .step p{margin:0; font-size:.9rem; opacity:.8;}
+
+  .need-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .need{background:var(--card); border:1px solid var(--line); border-radius:4px; padding:16px;}
+  .need svg{width:30px; height:30px; margin-bottom:8px;}
+  .need h4{margin:0 0 4px; font-size:.95rem;}
+  .need p{margin:0; font-size:.82rem; opacity:.75;}
+
+  .myth{border-bottom:1px solid var(--line);}
+  .myth summary{padding:16px 0; cursor:pointer; font-weight:500; list-style:none; display:flex; justify-content:space-between; gap:12px;}
+  .myth summary::-webkit-details-marker{display:none;}
+  .myth summary::after{content:'+'; color:var(--oxblood); font-size:1.3rem; line-height:1;}
+  .myth[open] summary::after{content:'–';}
+  .myth p{margin:0 0 18px; opacity:.85; max-width:38em;}
+
+  .org{background:var(--card); border:1px solid var(--line); border-radius:4px; padding:18px 20px; margin-bottom:12px; display:grid; grid-template-columns:40px 1fr; gap:14px;}
+  .org svg{width:26px; height:26px; margin-top:2px;}
+  .org h4{margin:0 0 4px; font-size:1.02rem;}
+  .org .tag{font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; color:var(--teal); font-weight:600;}
+  .org p{margin:6px 0 0; font-size:.9rem; opacity:.8;}
+  .org a{color:var(--oxblood);}
+
+  footer{padding:40px 24px 60px; border-top:1px solid var(--line); font-size:.85rem; opacity:.7;}
+  footer p{max-width:36em;}
+
+  @media (max-width:640px){
+    .hero{grid-template-columns:1fr; text-align:left;}
+    .hero-art{max-width:150px; justify-self:start;}
+    .hero h1{font-size:1.9rem;}
+    .need-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">Lifeline <span>Karachi</span></div>
+  <nav><a href="#checker">Check</a><a href="#process">Process</a><a href="#myths">Myths</a><a href="#directory">Donate</a></nav>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <div>
+      <h1>Karachi runs short of safe blood every single day.</h1>
+      <p class="lede">One donation can be split to help up to three patients — a thalassemia child, a surgery patient, a mother after delivery. Most people who could give simply never check if they're eligible. This takes two minutes.</p>
+      <div class="stat-row">
+        <div class="stat"><b>~3</b><span>lives helped per donation</span></div>
+        <div class="stat"><b>12 wks</b><span>gap between donations</span></div>
+        <div class="stat"><b>17–65</b><span>typical eligible age</span></div>
+      </div>
+    </div>
+    <svg class="hero-art" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 18 C 100 18, 40 90, 40 140 C 40 175, 68 198, 100 198 C 132 198, 160 175, 160 140 C 160 90, 100 18, 100 18 Z" fill="none" stroke="var(--oxblood)" stroke-width="3"/>
+      <path d="M100 18 C 100 18, 40 90, 40 140 C 40 175, 68 198, 100 198 C 132 198, 160 175, 160 140 C 160 90, 100 18, 100 18 Z" fill="var(--oxblood)" opacity="0.12"/>
+      <path d="M30 138 H70 L82 118 L98 158 L110 128 L120 138 H170" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </section>
+
+  <section id="checker">
+    <p class="kicker">Two-minute check</p>
+    <h2>Can you donate blood today?</h2>
+    <p class="intro">This is a screening guide, not a medical diagnosis — the blood bank will always run their own checks on-site. But it tells you whether it's worth showing up.</p>
+
+    <div id="checker-card">
+      <div class="progress"><i id="bar"></i></div>
+
+      <div class="q active" data-q="0"><p>Are you between 17 and 65 years old?</p><div class="btnrow"><button class="opt" data-val="yes">Yes</button><button class="opt" data-val="no">No</button></div></div>
+      <div class="q" data-q="1"><p>Do you weigh 50 kg (110 lbs) or more?</p><div class="btnrow"><button class="opt" data-val="yes">Yes</button><button class="opt" data-val="no">No</button></div></div>
+      <div class="q" data-q="2"><p>Has it been more than 3 months since your last blood donation (or never donated)?</p><div class="btnrow"><button class="opt" data-val="yes">Yes</button><button class="opt" data-val="no">No</button></div></div>
+      <div class="q" data-q="3"><p>Are you currently free of fever, infection, or major illness in the last week?</p><div class="btnrow"><button class="opt" data-val="yes">Yes</button><button class="opt" data-val="no">No</button></div></div>
+      <div class="q" data-q="4"><p>If applicable: are you not currently pregnant or breastfeeding?</p><div class="btnrow"><button class="opt" data-val="yes">Yes / not applicable</button><button class="opt" data-val="no">No</button></div></div>
+
+      <div id="result">
+        <span class="pill" id="pill"></span>
+        <h3 id="rtitle"></h3>
+        <p id="rtext"></p>
+        <button class="restart" id="restart">Start over</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <p class="kicker">What actually happens</p>
+    <h2>The donation process, step by step</h2>
+    <p class="intro">Most first-time donors skip donating simply because they don't know what to expect.</p>
+    <div class="steps">
+      <div class="step">
+        <svg class="num-ic" viewBox="0 0 44 44"><circle cx="22" cy="22" r="20" fill="none" stroke="var(--teal)" stroke-width="2"/><path d="M14 22h16M22 14v16" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/></svg>
+        <div><h4>Registration &amp; ID check</h4><p>You fill a short form and show a CNIC or B-form. Takes about 5 minutes.</p></div>
+      </div>
+      <div class="step">
+        <svg class="num-ic" viewBox="0 0 44 44"><circle cx="22" cy="22" r="20" fill="none" stroke="var(--teal)" stroke-width="2"/><path d="M16 22l4 4 8-9" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><h4>Quick health screening</h4><p>Hemoglobin, blood pressure, weight and pulse are checked on the spot — this is where eligibility is actually confirmed.</p></div>
+      </div>
+      <div class="step">
+        <svg class="num-ic" viewBox="0 0 44 44"><circle cx="22" cy="22" r="20" fill="none" stroke="var(--teal)" stroke-width="2"/><path d="M22 12v20M14 20h16" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/></svg>
+        <div><h4>The donation itself</h4><p>About 8–10 minutes, roughly 450ml collected via a single sterile, single-use needle. Most people feel a brief pinch and nothing more.</p></div>
+      </div>
+      <div class="step">
+        <svg class="num-ic" viewBox="0 0 44 44"><circle cx="22" cy="22" r="20" fill="none" stroke="var(--teal)" stroke-width="2"/><path d="M14 26c2-6 6-10 8-10s6 4 8 10" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        <div><h4>Rest &amp; refreshment</h4><p>10–15 minutes with juice and a snack before you leave. Avoid heavy exercise for the rest of the day.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="need">
+    <p class="kicker">Who it actually goes to</p>
+    <h2>Where your donation ends up</h2>
+    <div class="need-grid">
+      <div class="need"><svg viewBox="0 0 30 30"><path d="M15 5c0 6-8 9-8 16a8 8 0 0016 0c0-7-8-10-8-16z" fill="none" stroke="var(--oxblood)" stroke-width="2"/></svg><h4>Thalassemia patients</h4><p>Often need a transfusion every 2–4 weeks, for life.</p></div>
+      <div class="need"><svg viewBox="0 0 30 30"><rect x="5" y="10" width="20" height="14" rx="2" fill="none" stroke="var(--oxblood)" stroke-width="2"/><path d="M12 10V7a3 3 0 016 0v3" fill="none" stroke="var(--oxblood)" stroke-width="2"/></svg><h4>Surgery patients</h4><p>Emergency and planned operations keep steady demand on every blood type.</p></div>
+      <div class="need"><svg viewBox="0 0 30 30"><circle cx="15" cy="10" r="4" fill="none" stroke="var(--oxblood)" stroke-width="2"/><path d="M7 25c0-5 4-9 8-9s8 4 8 9" fill="none" stroke="var(--oxblood)" stroke-width="2"/></svg><h4>New mothers</h4><p>Postpartum hemorrhage is a leading cause of maternal complications.</p></div>
+      <div class="need"><svg viewBox="0 0 30 30"><path d="M15 4l3 9h9l-7 6 3 9-8-6-8 6 3-9-7-6h9z" fill="none" stroke="var(--oxblood)" stroke-width="2" stroke-linejoin="round"/></svg><h4>Trauma &amp; accident victims</h4><p>Road accidents are one of the largest sources of urgent blood demand in Karachi.</p></div>
+    </div>
+  </section>
+
+  <section id="myths">
+    <p class="kicker">Common misconceptions</p>
+    <h2>Myths vs. facts</h2>
+    <p class="intro">Most reasons people give for not donating don't hold up medically.</p>
+
+    <details class="myth" open><summary>"Donating blood weakens you long-term."</summary><p>Your body replaces the donated plasma within 24–48 hours and red blood cells within a few weeks. A short rest and some water afterward is all most healthy donors need.</p></details>
+    <details class="myth"><summary>"I have a common blood type, so my donation doesn't matter much."</summary><p>Common types are needed in the highest volume precisely because they're common — hospitals go through them fastest during shortages.</p></details>
+    <details class="myth"><summary>"Blood donation can give you an infection."</summary><p>Registered blood banks use single-use sterile needles and equipment for every donor. The risk to the donor is essentially zero at accredited centres.</p></details>
+    <details class="myth"><summary>"Fasting or Ramazan means I can't donate."</summary><p>Donation is generally discouraged only right before iftar due to low fluids; many centres in Karachi run dedicated post-iftar donation drives during Ramazan.</p></details>
+    <details class="myth"><summary>"Thalassemia patients only need blood occasionally."</summary><p>Many thalassemia patients need a transfusion every 2–4 weeks for life — it's one of the steadiest sources of demand on Karachi's blood banks.</p></details>
+    <details class="myth"><summary>"Donating is bad for the donor's own health."</summary><p>Regular donors have been shown to have slightly lower average iron overload risk, and each visit includes a free basic health screening — a check on hemoglobin, blood pressure and pulse you might not otherwise get.</p></details>
+  </section>
+
+  <section id="directory">
+    <p class="kicker">Where to actually go</p>
+    <h2>Blood banks &amp; donation centres in Karachi</h2>
+    <p class="intro">Call ahead to confirm hours and current need for your blood group.</p>
+
+    <div class="org"><svg viewBox="0 0 26 26"><path d="M13 2c0 5-7 8-7 14a7 7 0 0014 0c0-6-7-9-7-14z" fill="none" stroke="var(--oxblood)" stroke-width="2"/></svg><div><span class="tag">Blood bank</span><h4>Fatimid Foundation</h4><p>393 Britto Road, Garden East, Karachi · 021-32258656 — one of Pakistan's largest voluntary blood transfusion services, screens for HIV, Hepatitis B/C.</p></div></div>
+    <div class="org"><svg viewBox="0 0 26 26"><path d="M13 2c0 5-7 8-7 14a7 7 0 0014 0c0-6-7-9-7-14z" fill="none" stroke="var(--oxblood)" stroke-width="2"/></svg><div><span class="tag">Blood bank</span><h4>The Indus Hospital Blood Centre</h4><p>Pakistan's first fully centralised blood bank, built on 100% voluntary donation. Regularly partners with schools, colleges and offices to host donation drives.</p></div></div>
+    <div class="org"><svg viewBox="0 0 26 26"><path d="M13 2c0 5-7 8-7 14a7 7 0 0014 0c0-6-7-9-7-14z" fill="none" stroke="var(--oxblood)" stroke-width="2"/></svg><div><span class="tag">Blood bank</span><h4>JPMC Blood Bank (Patients' Aid Foundation)</h4><p>Rafiqui Shaheed Road, Karachi · 021-35211875 / 35211876</p></div></div>
+    <div class="org"><svg viewBox="0 0 26 26"><path d="M13 2c0 5-7 8-7 14a7 7 0 0014 0c0-6-7-9-7-14z" fill="none" stroke="var(--oxblood)" stroke-width="2"/></svg><div><span class="tag">Blood bank</span><h4>Pakistan Red Crescent Society — Sindh</h4><p>Hilal-e-Ahmer House, Block 7, Clifton · 021-35062278 · info@prcsindh.org.pk — also runs blood and first-aid camps city-wide.</p></div></div>
+  </section>
+
+  <footer>
+    <p>Built as an independent awareness project on Karachi's blood donation gap. Facts on eligibility are general screening guidelines — always follow the specific criteria of the blood bank you visit. Contact details found via public listings; confirm before visiting.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  const answers = {};
+  const total = 5;
+  const bar = document.getElementById('bar');
+  const qs = Array.from(document.querySelectorAll('.q'));
+  const result = document.getElementById('result');
+
+  function showQ(i){
+    qs.forEach(q => q.classList.remove('active'));
+    if(i < total){ qs[i].classList.add('active'); bar.style.width = (i/total*100) + '%'; }
+  }
+
+  qs.forEach((q, idx) => {
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers[idx] = btn.dataset.val;
+        if(idx + 1 < total){ showQ(idx + 1); } else { bar.style.width = '100%'; finish(); }
+      });
+    });
+  });
+
+  function finish(){
+    qs.forEach(q => q.classList.remove('active'));
+    const eligible = Object.values(answers).every(v => v === 'yes');
+    const pill = document.getElementById('pill');
+    const rtitle = document.getElementById('rtitle');
+    const rtext = document.getElementById('rtext');
+    if(eligible){
+      pill.textContent = 'Likely eligible'; pill.className = 'pill yes';
+      rtitle.textContent = "You're likely good to donate.";
+      rtext.textContent = "Head to a blood bank on the list below — they'll run a quick on-site check (hemoglobin, blood pressure, weight) before you donate.";
+    } else {
+      pill.textContent = 'Not right now'; pill.className = 'pill no';
+      rtitle.textContent = "Hold off for now — and that's okay.";
+      rtext.textContent = "One or more answers suggest you should wait or check with a doctor first. You can still help by encouraging someone eligible to donate.";
+    }
+    result.classList.add('show');
+  }
+
+  document.getElementById('restart').addEventListener('click', () => {
+    Object.keys(answers).forEach(k => delete answers[k]);
+    result.classList.remove('show');
+    showQ(0);
+  });
+})();
+</script>
+
+</body>
+</html>
